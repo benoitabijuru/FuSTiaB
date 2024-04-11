@@ -13,7 +13,7 @@ import {
   
   const MobileNav = () => {
     return (
-      <nav className="md:hidden">npm i svix
+      <nav className="md:hidden">
         <Sheet>
           <SheetTrigger className="align-middle">
             <Image 

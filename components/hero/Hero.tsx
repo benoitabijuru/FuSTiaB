@@ -21,7 +21,7 @@ const Hero = () => {
                   alt=""
                   width={1000}
                   height={1000}
-                  className='max-h-[70vh] object-contain object-center 2xl:max-h-[50vh] md:m-20 rounded'
+                  className="max-h-[70vh] object-contain object-center 2xl:max-h-[50vh] md:m-20 rounded"
                   /> 
                
             </div>
