@@ -1,3 +1,6 @@
+import Topbar from "@/components/shared/Topbar";
+import Footer from "@/components/shared/Footer";
+
 
 export default function Layout({
   children,
@@ -5,12 +8,13 @@ export default function Layout({
   children: React.ReactNode;
 }>) {
   return (
-     <main>
-        <div>
-            <div>
-                 {children}
-            </div>
+    
+        <div className="flex h-screen flex-col" >
+                <Topbar/>
+                 <main className="flex-1">{children}</main>
+                 
+                <Footer/>
         </div>
-     </main>
+    
   );
 }
