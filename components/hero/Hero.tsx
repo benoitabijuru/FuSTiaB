@@ -4,10 +4,7 @@ import EmailForm from '../emailform/EmailForm'
 
 const Hero = () => {
   return (
-    /** Create a list of header and allow header based on change of header 
-     * if I changed the link for nav bar, the header will change. 
-     * I intend to use array object and map all list object make header and assign to creare header. 
-     */
+    
           <section className="bg-primary-50 bg-dotted-pattern bg-contain py-5 md:py-10">
             <div className="wrapper grid grid-cols-1 gap-5 md:grid-cols-2 2xl:gap-0 ">
               <div className="flex flex-col justify-center gap-8">

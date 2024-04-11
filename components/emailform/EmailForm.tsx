@@ -7,11 +7,6 @@ import { Input } from "../ui/input"
 
 export default function Newsletter(){
   const form = useForm()
-    
-    
-    
-    
-  
   
   return (
 
@@ -23,14 +18,14 @@ export default function Newsletter(){
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
-                        <Input {...field} className="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " type="email" name="email" placeholder='Enter your email for Newsletter'/>
+                        <Input {...field} className="bg-gray-50 border text-gray-900 text-sm rounded-lg focus:ring-blue-500 focus:border-blue-500 block w-full p-2.5 " type="email" name="email" placeholder="Enter your email for Newsletter"/>
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
                 />
          
-          <Button type="submit" className='bg-blue-700 text-white py-3 my-3 w-full rounded-lg hover:bg-green-700'>Subscribe To Newsletter</Button>
+          <Button type="submit" className="bg-blue-700 text-white py-3 my-3 w-full rounded-lg hover:bg-green-700">Subscribe To Newsletter</Button>
       </form>
 
     </Form>
