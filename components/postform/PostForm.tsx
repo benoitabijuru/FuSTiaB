@@ -12,11 +12,6 @@ import { Textarea } from "../ui/textarea"
 import {FileUploader} from "../shared/FileUploader"
 import { useState } from "react"
 
-
-import DatePicker from 'react-date-picker';
-import 'react-date-picker/dist/DatePicker.css';
-import 'react-calendar/dist/Calendar.css';
-import { useNavigate } from 'react-router-dom';
 import { useUploadThing } from "@/lib/uploadthing"
 import { createArticle, updateArticle } from "@/lib/actions/articles.actions"
 import { useRouter } from "next/navigation"

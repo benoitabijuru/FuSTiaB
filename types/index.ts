@@ -3,14 +3,10 @@ export type CreateArticleParams = {
     article:{
         title:string
         description:string
-        author:string
         imageUrl:string
         categoryId:string
-        subtitle:string
-        introduction:string
-        body:string  
-        createdAt:Date
-        slug:string
+        content:string 
+        author:string
     }
    
     path:string
@@ -24,16 +20,9 @@ export type UpdateArticleParams = {
         _id:string
         title:string
         description:string
-        author:string
+        imageUrl:string
         categoryId:string
-        thumbnail:string
-        subtitle:string
-        introduction:string
-        body:string
-        imageurl:string 
-
-        updateAt:Date
-        slug:string
+        author:string
     }
     path:string
     
@@ -47,7 +36,6 @@ export type DeleteArticleParams = {
 export type GetAllArticlesParams = {
     query:string
     category:string
-    subcategory:string
     limit:number
     page:number
 }
