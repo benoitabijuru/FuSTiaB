@@ -1,6 +1,6 @@
-import { authOptions } from '@/app/api/auth/[...nextauth]/route';
+
 import PostForm from '@/components/postform/PostForm'
-import { navLinks } from '@/constants';
+
 
 
  const CreatePost = () => {
@@ -8,8 +8,8 @@ import { navLinks } from '@/constants';
 //  const {sessionClaims} = authOptions();
 
 //  const userId = sessionClaims?.userId as string;
-const userId = 1;
 
+const userId =""
   return (
     <>
       <section className=" bg-dotted-pattern bg-cover bg-center py-5"> 
