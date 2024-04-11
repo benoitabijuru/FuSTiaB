@@ -1,5 +1,5 @@
-import Image from 'next/image'
-import EmailForm from '../emailform/EmailForm'
+import Image from "next/image"
+import EmailForm from "../emailform/EmailForm"
 
 
 const Hero = () => {
