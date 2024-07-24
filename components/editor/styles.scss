@@ -1,0 +1,220 @@
+/* Basic editor styles */
+.tiptap {
+    > * + * {
+      margin-top: 0.75em;
+    }
+    p{
+      font-weight: 400;
+      letter-spacing: 0em;
+      font-size: 16px;
+      line-height: 1.5rem;
+    }
+
+    /* Link styles */
+    a {
+      color: var(--purple);
+      cursor: pointer;
+
+      &:hover {
+        color: var(--purple-contrast);
+      }
+    }
+  
+    /* List styles */
+  ul{
+    padding: 0 1rem;
+    margin: 1.25rem 1rem 1.25rem 0.4rem;
+    
+    li{
+      list-style-type: square;
+      margin-top: 0.25em;
+      margin-bottom: 0.25em;
+    }
+  }
+
+  ol {
+    padding: 0 1rem;
+    margin: 1.25rem 1rem 1.25rem 0.4rem;
+    
+    li{
+      margin-top: 0.25em;
+      margin-bottom: 0.25em;
+      list-style-type: upper-roman;
+    }
+  }
+  
+   /* Heading styles */
+   h1 {
+    @apply font-bold text-[36px] leading-[44px] lg:text-[48px] lg:leading-[56px]  xl:text-[54px] xl:leading-[70px];
+   }
+    h2 {
+      @apply font-bold text-[32px] leading-[40px] lg:text-[36px] lg:leading-[44px] xl:text-[40px] xl:leading-[48px];
+    }
+
+    h3 {
+      @apply font-bold text-[28px] leading-[36px] md:text-[36px] md:leading-[44px];
+    }
+
+    h4 {
+      @apply font-medium text-[32px] leading-[40px];
+    }
+
+/* Won't be used here */
+
+    h5 {
+      @apply font-bold text-[28px] leading-[36px];
+    }
+
+    h6 {
+        font-size: 12px;
+        line-height: 20px;
+    }
+/* Youtube embed */
+div[data-youtube-video] {
+  cursor: move;
+  padding-right: 1.5rem;
+  place-content: center
+
+  iframe {
+    border: 0.5rem solid var(--black-contrast);
+    display: block;
+    min-height: auto;
+    min-width: 100px;
+    outline: 0px solid transparent;
+    
+  }
+
+  &.ProseMirror-selectednode iframe {
+    outline: 3px solid var(--purple);
+    transition: outline 0.15s;
+  }
+}
+    
+  
+    code {
+      background-color: rgba(#616161, 0.1);
+      color: #616161;
+    }
+  
+    pre {
+      background: #0D0D0D;
+      color: #FFF;
+      font-family: 'JetBrainsMono', monospace;
+      padding: 0.75rem 1rem;
+      border-radius: 0.5rem;
+  
+      code {
+        color: inherit;
+        padding: 0;
+        background: none;
+        font-size: 0.8rem;
+      }
+    }
+  
+    img {
+          width: 100%;
+      height: auto;
+      aspect-ratio: 16/9;
+      object-fit: cover;
+    }
+  
+    /* Code and preformatted text styles */
+  code {
+    background-color: var(--purple-light);
+    border-radius: 0.4rem;
+    color: var(--black);
+    font-size: 0.85rem;
+    padding: 0.25em 0.3em;
+  }
+
+  pre {
+    background: var(--black);
+    border-radius: 0.5rem;
+    color: var(--white);
+    font-family: 'JetBrainsMono', monospace;
+    margin: 1.5rem 0;
+    padding: 0.75rem 1rem;
+
+    code {
+      background: none;
+      color: inherit;
+      font-size: 0.8rem;
+      padding: 0;
+    }
+  }
+
+  blockquote {
+    border-left: 3px solid var(--gray-3);
+    margin: 1.5rem 0;
+    padding-left: 1rem;
+  }
+
+  hr {
+    border: 1px solid rgb(67, 67, 72);
+    border-top: 1px solid var(--gray-2);
+    cursor: pointer;
+    margin: 0.2rem 0;
+    width: 100%;
+
+    &.ProseMirror-selectednode {
+      border-top: 1px solid var(--purple);
+    }
+  }
+  .tiptap {
+    table {
+      border-collapse: collapse;
+      table-layout: fixed;
+      width: 100%;
+      margin: 0;
+      overflow: hidden;
+  
+      td,
+      th {
+        min-width: 1em;
+        border: 2px solid #ced4da;
+        padding: 3px 5px;
+        vertical-align: top;
+        box-sizing: border-box;
+        position: relative;
+  
+        > * {
+          margin-bottom: 0;
+        }
+      }
+  
+      th {
+        font-weight: bold;
+        text-align: left;
+        background-color: #f1f3f5;
+      }
+  
+      .selectedCell:after {
+        z-index: 2;
+        position: absolute;
+        content: "";
+        left: 0; right: 0; top: 0; bottom: 0;
+        background: rgba(200, 200, 255, 0.4);
+        pointer-events: none;
+      }
+  
+      .column-resize-handle {
+        position: absolute;
+        right: -2px;
+        top: 0;
+        bottom: -2px;
+        width: 4px;
+        background-color: #adf;
+        pointer-events: none;
+      }
+    }
+  }
+  
+  .tableWrapper {
+    overflow-x: auto;
+  }
+  
+  .resize-cursor {
+    cursor: ew-resize;
+    cursor: col-resize;
+  }
+}

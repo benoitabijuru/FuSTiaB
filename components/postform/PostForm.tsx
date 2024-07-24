@@ -10,78 +10,83 @@ import { articleDefaultValues } from "@/constants"
 import Dropdown from "../shared/Dropdown"
 import { Textarea } from "../ui/textarea"
 import {FileUploader} from "../shared/FileUploader"
-import { useState } from "react"
-
+import { useState, useRef, useEffect } from "react"
 import { useUploadThing } from "@/lib/uploadthing"
 import { createArticle, updateArticle } from "@/lib/actions/articles.actions"
 import { useRouter } from "next/navigation"
-import { IArticle } from "@/lib/database/model/articles.model"
-import QuillEditor from "../shared/ContentEditor"
-
+import { IArticle } from "@/lib/database/model/TechnologyPost.model"
+import Tiptap from "../editor/Tiptap"
 
 
 
 type ArticleFormProps = {
   userId: string
-  type: "Create" | "Update"
+  type: "Create" | "Update",
   article?: IArticle,
-  articleId?: string
+  articleId?: string,
 }
 
-const ArticleForm = ({ userId, type, article, articleId }: ArticleFormProps) => {
+const ArticleForm = ({ userId, type, article, articleId}: ArticleFormProps) => {
   const [files, setFiles] = useState<File[]>([])
-  
-  const initialValues = article && type === 'Update' 
-  ? { 
-    ...article, 
-  }
-  : articleDefaultValues;
-  
-  const router = useRouter();
+    const [content, setContent] = useState<string>('')
 
-  const { startUpload } = useUploadThing('imageUploader')
-
-  const form = useForm<z.infer<typeof ArticleFormSchema>>({
-    resolver: zodResolver(ArticleFormSchema),
-    //articleDefaultValues:""
-    
-    
-    
-    
-  })
- 
-  async function onSubmit(values: z.infer<typeof ArticleFormSchema>) {
-    let uploadedImageUrl = values.imageUrl;
-
-    if(files.length > 0) {
-      const uploadedImages = await startUpload(files)
-
-      if(!uploadedImages) {
-        return
-      }
-
-      uploadedImageUrl = uploadedImages[0].url
+    const initialValues = article && type === 'Update'
+    ?{
+        
     }
-    
+    :articleDefaultValues;
 
-    if(type === 'Create') {
-      try {
-        const newArticle = await createArticle({
-          article: { ...values, imageUrl: uploadedImageUrl },
-          userId,
-          path: '/technology'
-        })
+    const router = useRouter();
 
-        if(newArticle) {
-          form.reset();
-          router.push(`/technology/${newArticle._id}`)
-          
-        }
-      } catch (error) {
-        console.log(error);
-      }
+    const {  startUpload } = useUploadThing('imageUploader')
+
+
+    const form = useForm<z.infer<typeof ArticleFormSchema>>({
+        resolver: zodResolver(ArticleFormSchema),
+        defaultValues: initialValues 
+      })
+
       
-    }
+  
+      async function onSubmit(values: z.infer<typeof ArticleFormSchema>) { 
+        
+
+        let uploadedImageUrl = values.imageUrl;
+
+        if(files.length > 0) {
+            const uploadedImages = await startUpload(files)
+      
+            if(!uploadedImages) {
+              return
+            }
+      
+            uploadedImageUrl = uploadedImages[0].url
+          }
+          
+          
+        if(type === 'Create') {
+            try {
+              const newArticle = await createArticle({
+                article: { ...values, imageUrl: uploadedImageUrl },
+                userId,
+                path:'/technology',
+              })
+      
+              if(newArticle) {
+                form.reset();
+                router.push(`/technology/${newArticle.slug}`)
+                
+              }
+
+            } catch (error) {
+              console.log(error);
+            }
+            
+          }
+        
+      }
+
+    
 
     // if(type === 'Update') {
     //   if(!articleId) {
@@ -90,22 +95,23 @@ const ArticleForm = ({ userId, type, article, articleId }: ArticleFormProps) => 
     //   }
 
     //   try {
-    //     const updatedEvent = await updateArticle({
+    //     const updatedArticle = await updateArticle({
     //       adminId,
-    //       article: { ...values, image: uploadedImageUrl, _id: articleId },
-    //       path: `/events/${articleId}`
+    //       article: { ...values, imageUrl: uploadedImageUrl, _id: articleId },
+    //       path: `/${articleId}`
     //     })
 
-    //     if(updatedEvent) {
+    //     if(updatedArticle) {
     //       form.reset();
-    //       router.push(`/events/${updatedEvent._id}`)
+    //       router.push(`${updatedArticle.path}${updatedArticle._id}`)
     //     }
     //   } catch (error) {
     //     console.log(error);
     //   }
     // }
-  } 
- 
+   
+
+  
  
 
   return (
@@ -119,6 +125,18 @@ const ArticleForm = ({ userId, type, article, articleId }: ArticleFormProps) => 
                   <FormItem className="w-full">
                     <FormControl>
                       <Input placeholder="Title of Article" {...field} className="input-field"/>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+              <FormField
+                control={form.control}
+                name="slug"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormControl>
+                      <Input placeholder="Slug of Article" {...field} className="input-field"/>
                     </FormControl>
                     <FormMessage />
                   </FormItem>
@@ -168,18 +186,7 @@ const ArticleForm = ({ userId, type, article, articleId }: ArticleFormProps) => 
               />
           </div>
           <div className="flex flex-col gap-5 md:flex-row">
-               <FormField
-                control={form.control}
-                name="author"
-                render={({ field }) => (
-                  <FormItem className="w-full">
-                    <FormControl className="">
-                      <Input placeholder="created by" {...field} className="input-field"/>
-                    </FormControl>
-                    <FormMessage />
-                  </FormItem>
-                )}
-              />
+               
                  {/* <FormField
                 control={form.control}
                 name="socialMedia"
@@ -201,16 +208,37 @@ const ArticleForm = ({ userId, type, article, articleId }: ArticleFormProps) => 
                   render={({ field }) => (
                     <FormItem className="w-full">
                       <FormControl>
-                        <QuillEditor
-        
-                        /> 
+                        <Tiptap
+                         content={content}
+                         onChange={field.onChange}
+                         setContent={setContent}
+                        />
+                     
                       </FormControl>
                       <FormMessage />
                     </FormItem>
                   )}
               />
           </div>
-          <Button type="submit">Publish This Article</Button>
+          <div className="flex flex-col gap-5 md:flex-row">
+          <FormField
+                control={form.control}
+                name="author"
+                render={({ field }) => (
+                  <FormItem className="w-full">
+                    <FormControl className="">
+                      <Input placeholder="author" {...field} className="input-field"/>
+                    </FormControl>
+                    <FormMessage />
+                  </FormItem>
+                )}
+              />
+          </div>
+          <Button type="submit" size="lg"
+          disabled={form.formState.isSubmitting}
+          className="button col-span-2 w-full">
+            {form.formState.isSubmitting ? ('Publishing article ....'):`${type} Article`}
+            </Button>
         </form>
     </Form>
   )

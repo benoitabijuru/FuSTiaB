@@ -1,9 +1,20 @@
-import React from 'react'
+import RouteHero from '@/components/hero/RouteHero';
+import Search from '@/components/shared/Search';
 
-const loading = () => {
+
+const loading = async () => {
+
   return (
-    <div>loading</div>
-  )
-}
+    <div className="mx-20">
+        <RouteHero/>
+        <div className="mx-20 py-10">
+        <Search />
+        </div>
+        <div className="py-5">
+        </div>
+        
+      </div>
+  );
+};
 
-export default loading
+export default loading;

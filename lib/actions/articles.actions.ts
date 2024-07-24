@@ -1,6 +1,6 @@
 'use server'
 
-import Article from "../database/model/articles.model";
+import Article from "../database/model/TechnologyPost.model";
 import { connectToDatabase } from "../database";
 import Category from "../database/model/category.model";
 import { CreateArticleParams, UpdateArticleParams, DeleteArticleParams, GetAllArticlesParams, GetArticlesByCategoryParams } from "@/types";
@@ -12,48 +12,66 @@ const getCategoryByName = async (name:string) =>{
     return Category.findOne({name:{$regex:name, $options:'i'}})
 }
 
-const populateArticle = (query:any) =>{
+const populateArticle = async (query:any) =>{
     return query
-        .populate({path:'author', model:User, select:'_id title description'})
-        .populate({path:'category', model:Category, select:'_id title'})
+        .populate({path:'author', model:User, select:'_id firstName lastName'})
+        .populate({path:'category', model:Category, select:'_id name'})
+        
 }
 
 // Create a new article
 export async function createArticle({ userId, article, path }: CreateArticleParams) {
     try { 
         // connect to database
-        await connectToDatabase()
+        await connectToDatabase();
+        
+        // admin
+        const author = await User.findById(userId);
+
+        if(!author){
+            throw new Error("No author for this article")
+        }
 
         // create a new post in database 
-        const newArticle = await Article.create({ ...article, category:article.categoryId, author:userId});
+        const newArticle = await Article.create({
+             ...article, 
+             category:article.categoryId, 
+             author:userId
+            });
         revalidatePath(path)
+        
         return JSON.parse(JSON.stringify(newArticle))
+        
     } catch (error) {
         handleError(error);
     }
 }
 
 // Get one article by Id
-export async function getArticleById(articleId: string) {
+export async function getArticleBySlug(articleSlug: string) {
     try {
         await connectToDatabase()
 
-        const article = await populateArticle(Article.findById(articleId))
-        if (!article) throw new Error('Article not found');
-        return JSON.parse(JSON.stringify(article))
+            // Find the article by its slug field
+            const articleQuery = Article.findOne({ slug: articleSlug });
+            const article = await populateArticle(articleQuery);
+            if (!article) throw new Error('Article not found');
+        
+            return JSON.parse(JSON.stringify(article));
+
     } catch (error) {
         handleError(error);
     }
 }
 
 // Update Article
-export async function updateArticle({ userId, article, path }: UpdateArticleParams) {
+export async function updateArticle({ adminId, article, path }: UpdateArticleParams) {
     try {
         await connectToDatabase()
 
         const articleToUpdate = await Article.findById(article._id)
         
-        if(!articleToUpdate || articleToUpdate.admin.toHexString() !== userId){
+        if(!articleToUpdate || articleToUpdate.admin.toHexString() !== adminId){
             throw new Error('Unauthorized or Event not found')
         }
 
@@ -83,7 +101,7 @@ export async function deleteArticle({ articleId, path }: DeleteArticleParams) {
 }
 
 // Get all articles
-export async function getAllArticles({ query, limit = 6, page, category}: GetAllArticlesParams) {
+export async function getAllArticles({ query, limit = 9, page, category}: GetAllArticlesParams) {
     try {
         await connectToDatabase()
         
@@ -101,6 +119,7 @@ export async function getAllArticles({ query, limit = 6, page, category}: GetAll
             .skip(skipAmount)
             .limit(limit);
         const articlesCount = await Article.countDocuments(conditions);
+        
         
         return {
             data: articlesQuery.map(articlesQuery => articlesQuery.toJSON()),
@@ -133,3 +152,6 @@ export async function getArticlesByCategory({ categoryId, articleId, limit = 6, 
         handleError(error);
     }
 }
+
+
+// fetchning viewers of the post

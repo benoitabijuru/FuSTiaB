@@ -1,8 +1,17 @@
-import React from 'react'
+import RouteHero from '@/components/hero/RouteHero';
+import Search from '@/components/shared/Search';
 
-const loading = () => {
+const loading = async () => {
+
   return (
-    <div>loading</div>
+    <div className="mx-20">
+    <div >
+    <RouteHero/>
+    <div className="mx-20">
+    <Search />
+    </div>
+  </div>
+</div>
   )
 }
 

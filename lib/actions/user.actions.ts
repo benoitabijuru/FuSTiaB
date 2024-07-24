@@ -3,8 +3,7 @@
 import { revalidatePath } from "next/cache"
 import { connectToDatabase } from "../database"
 import User from "../database/model/user.model"
-import Subscription from "../database/model/subscription.model"
-import Article from "../database/model/articles.model"
+import Article from "../database/model/TechnologyPost.model"
 import { handleError } from "../utils"
 
 import { CreateUserParams, UpdateUserParams } from "@/types"
@@ -61,13 +60,11 @@ export async function deleteUser(clerkId:string){
         await Promise.all([
             // Update the article collection to remove reference to the uer
         Article.updateMany(
-            {userId: {$in: userToDelete.events}},
-            {$pull: {admin: userToDelete.userId}}
+            {userId: {$in: userToDelete.articles}},
+            {$pull: {author: userToDelete.userId}}
         ),
 
-         // Updte the 'subscription collection to remove reference to the user'
-
-        Subscription.updateMany({userId:{$in:userToDelete.subscription}},{$unset:{buyer:1}}),    
+         // Updte the 'subscription collection to remove reference to the user'   
         ])
 
         // delete user

@@ -21,6 +21,6 @@
       "@/*": ["./*"]
     }
   },
-  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/shared/QuillEditor.js"],
+  "include": ["next-env.d.ts", "**/*.ts", "**/*.tsx", ".next/types/**/*.ts", "components/shared/QuillEditor.js", "components/editor/TipTap.js", "components/about/motion.js"],
   "exclude": ["node_modules"]
 }

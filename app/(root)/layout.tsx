@@ -1,5 +1,5 @@
 import Topbar from "@/components/shared/Topbar";
-import Footer from "@/components/shared/Footer";
+import FooterItem from "@/components/shared/Footer";
 
 
 export default function Layout({
@@ -11,9 +11,9 @@ export default function Layout({
     
         <div className="flex h-screen flex-col" >
                 <Topbar/>
-                 <main className="flex-1">{children}</main>
-                 
-                <Footer/>
+                 <main className="flex-1 mt-28">{children}</main>
+                 <hr />
+                <FooterItem/>
         </div>
     
   );
