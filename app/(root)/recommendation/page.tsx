@@ -43,7 +43,7 @@ export default async function Recommendation({ searchParams }: SearchParamsProps
         </div>
         <div className="">
         <RecommendationCollection
-            data={recommendationArticles?.data} 
+            data={recommendationArticles?.data || []}  
             emptyTitle="No Recommendation Article"
             emptyStateSubText="Come back later"
             collectionType="All_RecommendationPost"
@@ -57,7 +57,7 @@ export default async function Recommendation({ searchParams }: SearchParamsProps
     <div className="flex justify-center my-20">
             <Pagination
             page={searchParams?.page ? +searchParams.page : 1}
-            totalPages={recommendationArticles?.totalPages}
+            totalPages={recommendationArticles?.totalPages ?? 1}
             /> 
     </div>
     </>

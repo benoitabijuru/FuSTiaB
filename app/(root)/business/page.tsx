@@ -32,7 +32,7 @@ export default async function BusinessPage ({ searchParams }: SearchParamsProps)
         </div>
         <div className="py-5">
             <BusinessCollection
-              data={businessArticles?.data} 
+              data={businessArticles?.data || []} 
               emptyTitle="No Business Article"
               emptyStateSubText="Come back later"
               collectionType="All_BusinessPost"
@@ -44,7 +44,7 @@ export default async function BusinessPage ({ searchParams }: SearchParamsProps)
        <div className="flex justify-center my-20">
             <Pagination
             page={searchParams?.page ? +searchParams.page : 1}
-            totalPages={businessArticles?.totalPages}
+            totalPages={businessArticles?.totalPages ?? 1}
             /> 
         </div>
     </div>

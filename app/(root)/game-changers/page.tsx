@@ -36,7 +36,7 @@ export default async function GameChangersPage({ searchParams }: SearchParamsPro
         </div>
       <div className="py-5">
         <GameChangersCollection
-         data={gameChangersArticles?.data} 
+         data={gameChangersArticles?.data || []} 
          emptyTitle="No gameChangers Article"
          emptyStateSubText="Come back later"
          collectionType="All_GameChangersPost"
@@ -48,7 +48,7 @@ export default async function GameChangersPage({ searchParams }: SearchParamsPro
       <div className="flex justify-center my-20">
             <Pagination
             page={searchParams?.page ? +searchParams.page : 1}
-            totalPages={gameChangersArticles?.totalPages}
+            totalPages={gameChangersArticles?.totalPages ?? 1}
             /> 
         </div>
     </div>

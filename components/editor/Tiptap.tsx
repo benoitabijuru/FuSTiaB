@@ -67,7 +67,7 @@ const Tiptap = ({ onChange, content, setContent }: any) => {
           Link.configure({
             openOnClick: false,
             autolink: true,
-            defaultProtocol: 'https',
+            // defaultProtocol: 'https',
           }),
           
         ],

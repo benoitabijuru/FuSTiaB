@@ -30,7 +30,7 @@ export default async function Quotes(){
     <div className='bg-black'>
       <h1 className="py-10 md:py-20 lg:py-32 text-4xl md:text-6xl lg:text-[100px] text-center green-gradient-text">Inspiration Quotes</h1>
       <QuoteCollection
-      data = {quotes?.data}
+      data = {quotes?.data || []}
       />
     </div>
   )

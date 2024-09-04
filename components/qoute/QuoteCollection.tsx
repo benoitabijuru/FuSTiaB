@@ -4,9 +4,9 @@ import { IQuotes } from '@/lib/database/model/quotes.model'
 
 type QuoteCollectionProps  = {
     data: IQuotes[],
-    emptyQuote: string,
+ 
 }
-const QuoteCollection = ({data,emptyQuote}:QuoteCollectionProps) => {
+const QuoteCollection = ({data}:QuoteCollectionProps) => {
     
   return (
     <div className="px-4 sm:px-6 md:px-8 lg:px-10">

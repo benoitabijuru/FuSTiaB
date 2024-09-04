@@ -8,7 +8,7 @@ const ContactPart = () => {
   return (
     <section>
         <motion.div
-                    variants={staggerContainer}
+                    variants={staggerContainer(0.1, 0.2)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.25 }}
@@ -19,7 +19,7 @@ const ContactPart = () => {
         <div className="grid grid-cols-2 h-screen gap-5 px-20">
             <div className="p-10">
                 <motion.div
-                    variants={staggerContainer}
+                    variants={staggerContainer(0.1, 0.2)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.25 }}
@@ -29,7 +29,7 @@ const ContactPart = () => {
                     <p className="pt-5">For all Advertising or Sponsorship with FuSTIAB click here for more information and support</p>
                 </motion.div>
                 <motion.div
-                    variants={staggerContainer}
+                    variants={staggerContainer(0.1, 0.2)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.25 }}
@@ -39,7 +39,7 @@ const ContactPart = () => {
                     <p>Subscribe to FuSTIAB, for exclusive newsletters, advice, support and update to our Articles.</p>
                 </motion.div>
                 <motion.div
-                    variants={staggerContainer}
+                    variants={staggerContainer(0.1, 0.2)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.25 }}
@@ -51,7 +51,7 @@ const ContactPart = () => {
             </div>
             <div className="p-10">
                  <motion.div
-                    variants={staggerContainer}
+                    variants={staggerContainer(0.1, 0.2)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.25 }}
@@ -61,7 +61,7 @@ const ContactPart = () => {
                     <p>Do you have tips of new technology which will have great impact on future. Share with us gamechanging business and technologies.</p>
                 </motion.div>
                 <motion.div
-                    variants={staggerContainer}
+                    variants={staggerContainer(0.1, 0.2)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.25 }}
@@ -73,7 +73,7 @@ const ContactPart = () => {
             </div>
         </div>
         <motion.div
-                    variants={staggerContainer}
+                    variants={staggerContainer(0.1, 0.2)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.25 }}

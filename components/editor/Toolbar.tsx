@@ -289,22 +289,29 @@ const Toolbar = ({ editor, content }: Props) => {
         <Image className="w-5 h-5" />
         
       </button>
-      <button onClick={(e)=>{
-            e.preventDefault();
-            const url = window.prompt('Enter YouTube URL')
-            if (url) {
-              editor.commands.setYoutubeVideo({
-                src: url,
-                width: Math.max(320, parseInt(width, 10)) || 640,
-                height: Math.max(180, parseInt(height, 10)) || 480,
-              })
-            }
-          }}
-          className={editor.isActive({ textAlign: 'left' }) ? "bg-black text-white p-2 rounded-lg"
-                : "text-black hover:bg-sky-700 hover:text-white p-1 hover:rounded-lg"}>
-      
-          <Video className="w-5 h-5" />
-        </button>
+      <button
+  onClick={(e) => {
+    e.preventDefault();
+    const url = window.prompt('Enter YouTube URL');
+    
+    if (url) {
+      // Prompt for width and height, ensuring they are numbers
+      const width = Math.max(320, parseInt(window.prompt('Enter width', '640') || '640', 10));
+      const height = Math.max(180, parseInt(window.prompt('Enter height', '480') || '480', 10));
+
+      editor.commands.setYoutubeVideo({
+        src: url,
+        width: width,   // Pass as number
+        height: height, // Pass as number
+      });
+    }
+  }}
+  className={editor.isActive({ textAlign: 'left' }) ? "bg-black text-white p-2 rounded-lg" : "text-black hover:bg-sky-700 hover:text-white p-1 hover:rounded-lg"}
+>
+  <Video className="w-5 h-5" />
+</button>
+
+
         <button onClick={(e)=>{
             e.preventDefault();
             const previousUrl = editor.getAttributes('link').href

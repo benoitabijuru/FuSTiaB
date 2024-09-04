@@ -51,7 +51,7 @@ export default async function Africa({ searchParams }: SearchParamsProps){
           </div>
         </div>
           <AfricanPostCollection
-            data={getAfricaPosts?.data} 
+            data={getAfricaPosts?.data|| [] } 
             emptyTitle="No Tech Article"
             emptyStateSubText="Come back later"
             collectionType="All_AfricaPost"
@@ -62,8 +62,8 @@ export default async function Africa({ searchParams }: SearchParamsProps){
         </div>
         <div className="flex justify-center my-20">
             <Pagination
-            page={searchParams?.page ? +searchParams.page : 1}
-            totalPages={getAfricaPosts?.totalPages}
+             page={searchParams?.page ? +searchParams.page : 1}
+             totalPages={getAfricaPosts?.totalPages ?? 1}
             /> 
         </div>
     </>

@@ -50,7 +50,7 @@ export default async function Technology({ searchParams }: SearchParamsProps){
       </div>
       <div className="py-5">
         <TechCollection
-          data={techArticles?.data} 
+          data={techArticles?.data || []} 
           emptyTitle="No Tech Article"
           emptyStateSubText="Come back later"
           collectionType="All_TechPost"
@@ -62,7 +62,7 @@ export default async function Technology({ searchParams }: SearchParamsProps){
       <div className="flex justify-center my-10 sm:my-15 md:my-20">
         <Pagination
           page={searchParams?.page ? +searchParams.page : 1}
-          totalPages={techArticles?.totalPages}
+          totalPages={techArticles?.totalPages ?? 1}
         /> 
       </div>
     </div>

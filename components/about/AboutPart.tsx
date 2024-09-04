@@ -10,7 +10,7 @@ const AboutPart = () => {
     <section className="px-4 sm:px-6 lg:px-8">
     <div className="w-full">
         <motion.div
-            variants={staggerContainer}
+            variants={staggerContainer(0.1, 0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.1 }}
@@ -26,7 +26,7 @@ const AboutPart = () => {
     </div>
 
     <motion.div
-        variants={staggerContainer}
+        variants={staggerContainer(0.1, 0.2)}
         initial="hidden"
         whileInView="show"
         viewport={{ once: false, amount: 0.25 }}
@@ -44,7 +44,7 @@ const AboutPart = () => {
 
     <div className="pt-10 sm:pt-16 lg:pt-20">
         <motion.div
-            variants={staggerContainer}
+            variants={staggerContainer(0.1, 0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.25 }}
@@ -61,7 +61,7 @@ const AboutPart = () => {
 
     <div className="gradient-02 z-0">
         <motion.div
-            variants={staggerContainer}
+            variants={staggerContainer(0.1, 0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.25 }}
@@ -79,7 +79,7 @@ const AboutPart = () => {
 
     <div className="py-10 sm:py-16 lg:py-20">
         <motion.div
-            variants={staggerContainer}
+            variants={staggerContainer(0.1, 0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.25 }}
@@ -119,7 +119,7 @@ const AboutPart = () => {
 
     <div className="py-10 sm:py-16 lg:py-20 text-center wrapper">
         <motion.div
-            variants={staggerContainer}
+            variants={staggerContainer(0.1, 0.2)}
             initial="hidden"
             whileInView="show"
             viewport={{ once: false, amount: 0.25 }}

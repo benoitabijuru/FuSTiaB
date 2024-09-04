@@ -1,6 +1,6 @@
-import NewsletterSubscribe from '@/components/contact/NewsletterSub'
+
 import Hero from '@/components/hero/Hero'
-import SubscribeNewletter from '@/components/shared/SubscribeNewletter'
+
 import React from 'react'
 
 const page = () => {
