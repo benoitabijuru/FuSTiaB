@@ -88,7 +88,7 @@ type Props = {
                 <div className="wrapper my-8 flex flex-col gap-8 md:gap-12">
                 <h2 className="h2-bold">Read More</h2>
                       <AfricanPostCollection
-                          data={getAfricaPosts?.data}  
+                          data={getAfricaPosts?.data || []}  
                           emptyTitle="No Tech Article"
                           emptyStateSubText="Come back later"
                           collectionType="All_AfricaPost"

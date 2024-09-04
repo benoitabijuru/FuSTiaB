@@ -91,7 +91,7 @@ export default async function Home() {
     <div>
      <div className="hidden md:block">
         <LatestPostCollection
-          data={getAllCombinedPosts?.data}  
+          data={getAllCombinedPosts?.data  || []}  
           emptyTitle="No Tech Article"
           emptyStateSubText="Come back later"
           collectionType="All_LatestPost"
@@ -104,7 +104,7 @@ export default async function Home() {
         <h1 className=' text-xl font-semibold italic border-b-2 mt-10 mx-10 px-5 border-slate-600 hover:border-b-yellow-700'><Link href="/africa">Africa</Link></h1>
         <div className="py-10 mx-10">
             <AfricanPostCollection
-            data={getAfricaPosts?.data}  
+            data={getAfricaPosts?.data  || []}  
             emptyTitle="No Tech Article"
             emptyStateSubText="Come back later"
             collectionType="All_AfricaPost"
@@ -117,7 +117,7 @@ export default async function Home() {
       <h1 className=' text-2xl font-semibold italic  border-t-4 border-b-2 p-5 mx-10 border-slate-600'>Featured</h1>
       <div className="py-10 mx-10">
       <FeaturedPost
-        data={FeaturedPosts?.data} 
+        data={FeaturedPosts?.data  || []} 
         emptyTitle="No Featured Article"
         emptyStateSubText="Come back later"
         collectionType="All_FeaturedPost"
@@ -130,7 +130,7 @@ export default async function Home() {
       <h1 className=' text-2xl font-semibold italic  border-t-4 border-b-2 p-5 mx-10 border-slate-600 hover:border-b-yellow-700'><Link href="/technology">Technology</Link></h1>
       <div className="py-10 mx-10">
       <Collection 
-        data={techArticles?.data}  
+        data={techArticles?.data  || []}  
         emptyTitle="No Tech Article"
         emptyStateSubText="Come back later"
         collectionType="All_TechPost"
@@ -142,7 +142,7 @@ export default async function Home() {
       <h1 className='text-2xl font-semibold italic text-black border-t-4 border-b-2 p-5 mx-10 border-slate-600'><Link href="/business">Business</Link></h1>
       <div className="py-10 m-10">
         <BusinessCollection
-          data={businessArticles?.data} 
+          data={businessArticles?.data  || []} 
           emptyTitle="No Business Article"
           emptyStateSubText="Come back later"
           collectionType="All_BusinessPost"
@@ -154,7 +154,7 @@ export default async function Home() {
      <h1 className=' text-2xl font-semibold italic hover:text-blue-700  border-t-4 border-b-2 p-5 mx-10 border-slate-600'> <Link href="/recommendation">Recommendation</Link></h1>
       <div className="py-10 m-10">
         <RecommendationCollection
-        data={recommendationArticles?.data} 
+        data={recommendationArticles?.data  || []} 
         emptyTitle="No Recommendation Article"
         emptyStateSubText="Come back later"
         collectionType="All_RecommendationPost"
@@ -166,7 +166,7 @@ export default async function Home() {
       <h1 className=' text-2xl font-semibold italic hover:text-green-700  border-t-4 border-b-2 p-5 mx-10 border-slate-600'><Link href="/game-changers">Game Changers</Link></h1>
       <div className="py-10 m-10">
         <GameChangersCollection
-         data={gameChangersArticles?.data} 
+         data={gameChangersArticles?.data  || []} 
          emptyTitle="No gameChangers Article"
          emptyStateSubText="Come back later"
          collectionType="All_GameChangersPost"

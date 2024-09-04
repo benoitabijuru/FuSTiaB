@@ -109,7 +109,7 @@ export async function generateMetadata({ params: { slug }, searchParams}: Search
           <h2 className="h2-bold">Read More</h2>
 
           <Collection 
-              data={techArticles?.data}
+              data={techArticles?.data  || []}
               emptyTitle="No Tech Article"
               emptyStateSubText="Come back later"
               collectionType="All_TechPost"

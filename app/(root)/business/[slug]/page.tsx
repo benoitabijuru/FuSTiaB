@@ -90,7 +90,7 @@ const businessPostDetails = async ({ params: { slug }, searchParams }: SearchPar
             <div className="wrapper my-5 sm:my-8 flex flex-col gap-8 md:gap-12">
               <h2 className="text-xl sm:text-2xl lg:text-3xl font-bold">Read More</h2>
               <BusinessCollection
-                data={businessArticles?.data}
+                data={businessArticles?.data  || []}
                 emptyTitle="No Tech Article"
                 emptyStateSubText="Come back later"
                 collectionType="All_BusinessPost"

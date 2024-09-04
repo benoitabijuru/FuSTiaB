@@ -87,7 +87,7 @@ searchParams: { [key: string]: string | string[] | undefined }
       <h2 className="h2-bold">Read More</h2>
       
       <RecommendationCollection
-          data={recommendationArticles?.data}
+          data={recommendationArticles?.data  || []}
           emptyTitle="No Tech Article"
           emptyStateSubText="Come back later"
           collectionType="All_RecommendationPost"

@@ -87,7 +87,7 @@ images: [gameChangersPost.imageUrl],
 <h2 className="h2-bold">Read More</h2>
 
 <GameChangersCollection
-    data={gameChangersArticles?.data}
+    data={gameChangersArticles?.data  || []}
     emptyTitle="No Tech Article"
     emptyStateSubText="Come back later"
     collectionType="All_GameChangersPost"
