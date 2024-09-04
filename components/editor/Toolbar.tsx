@@ -401,11 +401,14 @@ const Toolbar = ({ editor, content }: Props) => {
       </button> 
       </div>
       <div>
-      <input
-        type="color"
-        onInput={event => editor.chain().focus().setColor(event.target.value).run()}
-        value={editor.getAttributes('textStyle').color}
-        data-testid="setColor"
+            <input
+            type="color"
+            onInput={event => {
+              const target = event.target as HTMLInputElement; // Type assertion
+              editor.chain().focus().setColor(target.value).run();
+            }}
+            value={editor.getAttributes('textStyle').color}
+            data-testid="setColor"
       />
     </div>
     </div>
