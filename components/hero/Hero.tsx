@@ -15,7 +15,7 @@ const Hero = ({}) => {
             <div className="mx-5">
               <div className="flex flex-col justify-center gap-8">
               <motion.div
-                    variants={staggerContainer}
+                    variants={staggerContainer(0.1, 0.2)}
                     initial="hidden"
                     whileInView="show"
                     viewport={{ once: false, amount: 0.25 }}
