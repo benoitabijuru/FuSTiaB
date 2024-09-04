@@ -33,20 +33,20 @@ const LatestPostCollection = ({
  
   return (
     <div className="px-20 pb-5 shadow-xl border-t-2 border-b-2 bg-stone-50">
-      <p className='bg-orange-500 p-2 px-5 mt-5 mx-5 w-32 rounded-full font-bold'>Latest Posts</p>
+      <p className='bg-orange-500 p-2 px-5 mt-10 mx-5 w-32 rounded-xl font-bold'>Latest Posts</p>
        
      <Carousel className="flex flex-row w-full ">
       <CarouselContent className="-ml-1 divide-x-2 ">
         {data.map((allPost) => (
-          <CarouselItem key={allPost._id} className=" basis-1/4">  
+          <CarouselItem key={allPost._id} className=" basis-full md:basis-1/3 lg:basis-1/4">  
                 <CardContent className="">
                   <LatestPostCard allPost={allPost} />
                 </CardContent>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className='bg-green-100 hover:bg-green-500'/>
+      <CarouselNext className='bg-green-100 hover:bg-green-500' />
     </Carousel>
     </div>
   )

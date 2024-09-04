@@ -9,20 +9,20 @@ type QuoteCollectionProps  = {
 const QuoteCollection = ({data,emptyQuote}:QuoteCollectionProps) => {
     
   return (
-    <div>
-
-        <div className="flex flex-col bg-slate-500">
-            <ul className="flex flex-col space-y-10 py-10">
+    <div className="px-4 sm:px-6 md:px-8 lg:px-10">
+        <div className="flex flex-col">
+            <ul className="flex flex-col space-y-6 sm:space-y-8 md:space-y-10 py-6 sm:py-8 md:py-10">
                 {data.map((quote) => {
-                    return(
+                    return (
                         <li key={quote._id} className="flex justify-center">
-                             <QuoteCard quote={quote} />
+                            <QuoteCard quote={quote} />
                         </li>
-                    )
+                    );
                 })}
             </ul>
         </div>
     </div>
+
   )
 }
 

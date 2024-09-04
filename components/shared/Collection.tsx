@@ -13,7 +13,7 @@ type CollectionProps = {
   collectionType?: "All_TechPost" | "Latest_Tech_Post" | "My_TechPost"
 }
 
-const TechCollection = ({
+const Collection = ({
   data,
   emptyTitle,
   emptyStateSubText,
@@ -28,9 +28,9 @@ const TechCollection = ({
     {data.length > 0 ? (
         <div className="flex flex-col">
             <ul className="grid w-full grid-cols-1 gap-5 sm:grid-cols-2 lg:grid-cols-3 xl:gap-10">
-                {data.map((article) => {
+                {data.map((article, index) => {
                     return(
-                        <li key={article._id} className="flex justify-center">
+                        <li key={article._id} className="flex justify-center" >
                              <PostCard article={article} />
                         </li>
                     )
@@ -48,4 +48,4 @@ const TechCollection = ({
   )
 }
 
-export default TechCollection;
+export default Collection;

@@ -9,25 +9,10 @@ import {
   } from "@/components/ui/sheet"
   import Image from "next/image"
   import { Separator } from "../ui/separator"
-  import NavItems from "./NavItems"
-import { navLinks } from "@/constants"
-import Link from "next/link"
 import { usePathname } from "next/navigation"
-import {
-  NavigationMenu,
-  NavigationMenuContent,
-  NavigationMenuIndicator,
-  NavigationMenuItem,
-  NavigationMenuLink,
-  NavigationMenuList,
-  NavigationMenuTrigger,
-  NavigationMenuViewport,
-} from "@/components/ui/navigation-menu"
-import { navigationMenuTriggerStyle } from "@/components/ui/navigation-menu"
-
-
-
-
+import { sideNavLinks } from "@/constants"
+import Link from "next/link"
+import { Button } from "../ui/button"
 
 
 const SHEET_SIDES = ["left"] as const
@@ -60,190 +45,28 @@ type SheetSide = (typeof SHEET_SIDES)[0]
               height={38}
             />
             <Separator className="border border-gray-50" />
-            <div className="flex flex-col">
-            <NavigationMenu>
-                <NavigationMenuList>
-                <NavigationMenuItem>
-                    <NavigationMenuTrigger >
-                      <p className="">Technology</p>
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                        </NavigationMenuContent>
-                        <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                    <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                    
-                    <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                
-                  
-
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger >
-                      <p className="">Technology</p>
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                        </NavigationMenuContent>
-                        <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                    <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                    <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-
-
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger >
-                      <p className="">Technology</p>
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                        </NavigationMenuContent>
-                        <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                    <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                    <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger >
-                      <p className="">Technology</p>
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                        </NavigationMenuContent>
-                        <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                    <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                    <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-
-                  <NavigationMenuItem>
-                    <NavigationMenuTrigger >
-                      <p className="">Technology</p>
-                    </NavigationMenuTrigger>
-                    <NavigationMenuContent>
-                      
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                        </NavigationMenuContent>
-                        <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                    <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                    <NavigationMenuContent>
-                       <Link href="/technology" legacyBehavior passHref>
-                          <NavigationMenuLink className={navigationMenuTriggerStyle()}>
-                            Technology
-                          </NavigationMenuLink>
-                      </Link>
-                    </NavigationMenuContent>
-                  </NavigationMenuItem>
-                </NavigationMenuList>
-            </NavigationMenu>
-         
+            <div className="">
+            <div className="py-2">
+            <Link href="/newsletter"><Button type="submit" className="bg-sky-50 font-semibold text-black  w-full rounded-lg hover:bg-blue-200"  >Subscribe To Newsletter</Button></Link>
+          </div>
+            </div>
+            <div className="">
+            <ul className="md:flex-between flex w-full flex-col gap-5 ml-20">
+  {sideNavLinks.map((link) => {
+    const isActive = pathname === link.path;
+    
+    return (
+      <li
+        key={link.path}
+        className={`${
+          isActive && 'text-slate-500'
+        } p-medium-16 whitespace-nowrap hover:font-bold w-full`}
+      >
+        <Link href={link.path}>{link.name}</Link>
+      </li>
+    );
+  })}
+</ul>
             </div>
             
           </SheetContent>

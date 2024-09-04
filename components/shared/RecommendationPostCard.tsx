@@ -10,7 +10,7 @@ const RecommendationPostCard = ({recommendationPost}:RecommendationCardProps) =>
     <div className="group relative flex min-h-[350px] w-full max-w-[400px] flex-col overflow-hidden rounded- bg-white shadow-md transition-all hover:shadow-2xl md:min-h-[350px] ">
     <Link href={`/recommendation/${recommendationPost.slug}`}
     style={{backgroundImage:`url(${recommendationPost.imageUrl})`}}
-    className='flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500'
+    className='flex-center flex-grow bg-gray-50 bg-cover bg-center text-grey-500 hover-effect'
     />
      {/* Is Article AUthor for edit */}
      <Link 
@@ -19,7 +19,7 @@ const RecommendationPostCard = ({recommendationPost}:RecommendationCardProps) =>
 
      >
      
-     <p className='p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black hover:text-blue-600'>{recommendationPost.title}</p>
+     <p className='p-medium-16 md:p-medium-20 line-clamp-2 flex-1 text-black hover:underline'>{recommendationPost.title}</p>
      <p className="text-slate-500 line-clamp-2 flex-1">{recommendationPost.description}</p>
      </Link>
    </div>

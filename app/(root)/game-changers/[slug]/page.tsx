@@ -1,10 +1,12 @@
 
 
 import SocialLinks from "@/components/shared/SocialLinks";
-import { getGameChangersPostBySlug } from "@/lib/actions/gameChangersPost.action";
+import { getAllGameChangersPost, getGameChangersPostBySlug } from "@/lib/actions/gameChangersPost.action";
 import { SearchParamsProps } from "@/types"
 import Image from "next/image";
 import type { Metadata, ResolvingMetadata } from 'next'
+import { formatDateTime } from "@/lib/utils";
+import GameChangersCollection from "@/components/shared/GameChangersCollection";
 
 type Props = {
 params: { slug: string }
@@ -28,11 +30,25 @@ images: [gameChangersPost.imageUrl],
 },
 }
 }
-  const gameChangerPostDetails = async ( { params: { slug }}: SearchParamsProps) => {
+  const gameChangerPostDetails = async ( { params: { slug },searchParams}: SearchParamsProps) => {
     const gameChangersPost = await getGameChangersPostBySlug(slug);
 
+    const page = Number(searchParams?.page) || 1;
+    const searchText = (searchParams?.query as string) || '';
+    const category = (searchParams?.category as string) || '';
+
+    const gameChangersArticles= await getAllGameChangersPost({
+      query: searchText,
+      category,
+      page: 1,
+      limit: 6
+    })
+
     return (
-      <section className="justify-center wrapper">
+      <>
+      <section className="container mx-32 px-10 my-20">
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-12">
+        <div className="col-span-1 lg:col-span-8">
       <div className="">
           <p className="text-[14px] py-3">Game Changers | <span className="text-orange-700">{gameChangersPost.category.name}</span></p>
         
@@ -44,7 +60,7 @@ images: [gameChangersPost.imageUrl],
         </div>
         <hr />
         <div className="py-5 ">
-        <p className="text-yellow-600  p-medium-14"><span className="text-slate-600">Created: </span> {gameChangersPost.createdAt}</p>
+        <p className="text-yellow-600  p-medium-14">{formatDateTime(gameChangersPost.createdAt).dateOnly}</p>
           
         </div>
        <div className="pb-5 flex flex-row justify-between">
@@ -67,10 +83,43 @@ images: [gameChangersPost.imageUrl],
   
       <div dangerouslySetInnerHTML={{ __html: gameChangersPost.content }} className="text-2xl"/>
       </div>
+      <div className="wrapper my-8 flex flex-col gap-8 md:gap-12">
+<h2 className="h2-bold">Read More</h2>
+
+<GameChangersCollection
+    data={gameChangersArticles?.data}
+    emptyTitle="No Tech Article"
+    emptyStateSubText="Come back later"
+    collectionType="All_GameChangersPost"
+    limit={3}
+    page={searchParams.page as string}
+    totalPages={gameChangersArticles?.totalPages}
+
+  />
+</div>
       
-        
+     </div> 
+  {/* <div className="col-span-1 lg:col-span-4">
+    <div className="relative lg:sticky top-8">
+      <h2 className="h2-bold">Read More</h2>
+      <GameChangersCollection
+      data={gameChangersArticles?.data}
+      emptyTitle="No Tech Article"
+      emptyStateSubText="Come back later"
+      collectionType="All_GameChangersPost"
+      limit={3}
+      page={searchParams.page as string}
+      totalPages={gameChangersArticles?.totalPages}
+
+    />
+    </div>
+    </div> */}
+     </div>  
       
       </section>
+
+
+</>
     )
   }
   

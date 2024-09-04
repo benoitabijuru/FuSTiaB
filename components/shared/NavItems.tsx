@@ -9,7 +9,7 @@ const NavItems = () => {
   const pathname = usePathname();
 
   return (
-    <ul className="md:flex-between flex w-full flex-col items-start gap-5 md:flex-row">
+    <ul className="md:flex-between flex w-full flex-col items-start gap-8 md:flex-row">
       {navLinks.map((link) => {
         const isActive = pathname === link.path;
         
@@ -17,8 +17,8 @@ const NavItems = () => {
           <li
             key={link.path}
             className={`${
-              isActive && 'text-slate-500'
-            } flex-center p-medium-16 whitespace-nowrap  hover:font-bold`}
+              isActive && 'text-slate-400'
+            } flex justify-center items-center p-medium-16 whitespace-nowrap font-extralight hover:underline`}
           >
             <Link href={link.path}>{link.name}</Link>
           </li>

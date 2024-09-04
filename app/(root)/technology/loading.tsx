@@ -1,19 +1,12 @@
-import RouteHero from '@/components/hero/RouteHero';
-import Search from '@/components/shared/Search';
-
 
 const loading = async () => {
 
   return (
-    <div className="mx-20">
-        <RouteHero/>
-        <div className="mx-20 py-10">
-        <Search />
-        </div>
-        <div className="py-5">
-        </div>
-        
-      </div>
+    <div className="h-[100vh] flex items-center justify-center">
+      <h1 className="text-[50px] text-center font-black">
+        Technology
+      </h1>
+    </div>
   );
 };
 

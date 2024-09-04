@@ -1,5 +1,8 @@
-// Creating Articles
-
+type SEO = {
+    metaTitle?: string;
+    metaDescription?: string;
+    keywords?: string[];
+  };
 
 // Technology
 export type CreateArticleParams = {
@@ -8,10 +11,15 @@ export type CreateArticleParams = {
         title:string
         description:string
         imageUrl:string
+        imageCaption:string
         categoryId:string
         content:string 
         author:string
         slug:string
+        isFeatured: boolean;
+        isRelatedToAfrica: boolean;
+        isNewsTrending:boolean;
+        seo?: SEO;  
     }
     path:string
 
@@ -25,10 +33,15 @@ export type CreateBusinessPostParams = {
         title:string
         description:string
         imageUrl:string
+        imageCaption:string
         categoryId:string
         content:string 
         author:string
         slug:string
+        isFeatured: boolean;
+        isRelatedToAfrica: boolean;
+        isNewsTrending:boolean;
+        seo?: SEO;  
     }
     path:string
 }
@@ -39,10 +52,15 @@ export type CreateRecommendationPostParams = {
         title:string
         description:string
         imageUrl:string
+        imageCaption:string
         categoryId:string
         content:string 
         author:string
         slug:string
+        isFeatured: boolean;
+        isRelatedToAfrica: boolean;
+        isNewsTrending:boolean;
+        seo?: SEO;  
     }
     path:string
 }
@@ -54,10 +72,15 @@ export type CreateGameChangersPostParams = {
         title:string
         description:string
         imageUrl:string
+        imageCaption:string
         categoryId:string
         content:string 
         author:string
         slug:string
+        isFeatured: boolean;
+        isRelatedToAfrica: boolean;
+        isNewsTrending:boolean;
+        seo?: SEO;  
     }
     path:string
 }
@@ -186,6 +209,13 @@ export type GetAllGameChangersPostParams = {
 
 // Get Article and post by category params
 
+export type GetRelatedPostByCategoryParams = {
+    categoryId: string
+    articleSlug: string
+    limit?: number
+    page: number | string
+  }
+
 // Get technology by category params
 export type GetArticlesByCategoryParams = {
     categoryId:string
@@ -256,7 +286,11 @@ export type CreateTechCategoryParams = {
     techCategoryName:string
     
 }
+// subscriber 
 
+export type SubscribeParams = {
+    email:string,
+}
 // Creating user params
 export type CreateUserParams = {
     clerkId:string

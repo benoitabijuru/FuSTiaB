@@ -1,5 +1,6 @@
 import ArticleForm from "@/components/postform/PostForm";
 import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 
  const CreateTechnologyPost = () => {
@@ -8,6 +9,7 @@ import { auth } from "@clerk/nextjs/server";
 
  
  const userId = sessionClaims?.userId as string;
+ 
 
 
   return (

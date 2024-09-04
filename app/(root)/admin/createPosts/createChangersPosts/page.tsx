@@ -1,5 +1,6 @@
 import GameChangersPostForm from "@/components/postform/ChangersPostForm";
 import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 
  const CreateGameChangersPost = () => {
@@ -8,6 +9,7 @@ import { auth } from "@clerk/nextjs/server";
 
  
  const userId = sessionClaims?.userId as string;
+
 
 
   return (

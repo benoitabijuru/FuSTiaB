@@ -11,6 +11,7 @@ import { SubscribeEmail } from "@/lib/actions/email.actions"
 import { ToastContainer, toast } from 'react-toastify'
 import 'react-toastify/dist/ReactToastify.css'
 import { useState } from "react"
+import { Subscribe } from "@/lib/actions/subscribe.actions"
 
 const EmailSubscribe = () => {
   const [isToastVisible, setIsToastVisible] = useState(false);
@@ -32,6 +33,15 @@ const EmailSubscribe = () => {
         onClose: () => setIsToastVisible(false)
       });
       setIsToastVisible(true);
+
+      const subscriber = await Subscribe(values)
+      if (subscriber){
+        form.reset({email:""});
+        toast.success("Email submitted successfully!", {
+          onClose: () => setIsToastVisible(false)
+        });
+        setIsToastVisible(true);
+      }
 
     } catch (error) {
       console.log(error);

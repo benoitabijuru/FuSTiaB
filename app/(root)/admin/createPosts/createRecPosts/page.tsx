@@ -1,14 +1,16 @@
 
 import RecommendationPostForm from "@/components/postform/RecommendationPostForm";
 import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 
- const CreateGameChangersPost = () => {
+ const CreateRecommendationPost = () => {
 
  const {sessionClaims} = auth();
 
  
  const userId = sessionClaims?.userId as string;
+
 
 
   return (
@@ -24,4 +26,4 @@ import { auth } from "@clerk/nextjs/server";
   )
 }
 
-export default CreateGameChangersPost
+export default CreateRecommendationPost

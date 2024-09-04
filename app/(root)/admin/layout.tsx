@@ -1,11 +1,22 @@
 import AdminSideBar from "@/components/shared/AdminSideBar";
 
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
+
+ 
 export default function Layout({
   children,
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  const { sessionClaims } = auth()
+
+  // If the user does not have the admin role, redirect them to the home page
+  if (sessionClaims?.role !== 'admin') {
+    redirect('/')
+  }
+  
   return (
      <main>
          <section className="flex flex-row">
@@ -15,7 +26,7 @@ export default function Layout({
               <AdminSideBar/>
           </div>
         </aside>
-        <div className="px-20">
+        <div className="m-[100px]">
         {children}
         </div>
         

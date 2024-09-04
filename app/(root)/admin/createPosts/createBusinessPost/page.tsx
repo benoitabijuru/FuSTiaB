@@ -1,11 +1,11 @@
 import BusinessPostForm from "@/components/postform/BusinessPostForm";
 import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
 
  const CreateBusinessPost = () => {
 
  const {sessionClaims} = auth();
-
  
  const userId = sessionClaims?.userId as string;
 

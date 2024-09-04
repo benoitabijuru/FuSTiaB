@@ -1,8 +1,8 @@
-import Hero from '@/components/hero/Hero'
+
 import Qoute from '@/components/qoute/Qoute'
 import Link from 'next/link'
 import FeaturedPost from '@/components/shared/FeaturedPost'
-import TechCollection from '@/components/shared/TechCollection'
+import Collection from '@/components/shared/Collection'
 import BusinessCollection from '@/components/shared/BusinessCollection'
 import RecommendationCollection from '@/components/shared/RecommendationCollection'
 import GameChangersCollection from '@/components/shared/GameChangersCollection'
@@ -12,23 +12,33 @@ import { getAllRecommendationPost } from '@/lib/actions/recommendation.action'
 import { getAllGameChangersPost } from '@/lib/actions/gameChangersPost.action'
 import LatestPostCollection from '@/components/shared/LatestPostCollection'
 import { Metadata } from 'next'
-import { getCombinedPosts } from '@/lib/actions/pipeline.actions'
-import SocialLinks from '@/components/shared/SocialLinks'
+import { getCombinedAfricaPosts, getCombinedPosts, getFeaturedPosts } from '@/lib/actions/pipeline.actions'
+import AfricanPostCollection from '@/components/shared/AfricanPostCollection'
 
 export const metadata: Metadata = {
   title:{
-    absolute:"FUSTIAB"
+        absolute:"FUSTIAB"
   },
   description: "Discover the Magic of Technology and Dive Deep into the World of Entrepreneurship. Be Prepared for Future Trends by explore the cutting-edge world of technology and unleash your entrepreneurial spirit. Stay ahead of the curve by understanding and preparing for future trends in the industry.",
-  metadataBase:new URL('https://fustiab.com'),
+  // metadataBase:new URL('/'),
+  keywords:["Africa","Technology","Business","Recommendation","Game Changers"],
  alternates: {
-  canonical: '/',
-  languages: {
-    'en-US': '/en-US',
-  },
+        canonical: '/',
+        languages: {
+          'en-US': '/en-US',
+        },
 },
 openGraph: {
-  images: '/og-image.png',
+        type:"website",
+        title:"FUSTIAB",
+        url:"/",
+        description:"Discover the Magic of Technology and Dive Deep into the World of Entrepreneurship. Be Prepared for Future Trends by explore the cutting-edge world of technology and unleash your entrepreneurial spirit. Stay ahead of the curve by understanding and preparing for future trends in the industry.",
+        siteName:"FUSTIAB"
+  
+},
+twitter: {
+  title:"FUSTIAB",
+  description:"Discover the Magic of Technology and Dive Deep into the World of Entrepreneurship. Be Prepared for Future Trends by explore the cutting-edge world of technology and unleash your entrepreneurial spirit. Stay ahead of the curve by understanding and preparing for future trends in the industry.",
 },
 }
 
@@ -44,7 +54,7 @@ export default async function Home() {
     query: '',
     category: '',
     page: 1,
-    limit: 20
+    limit: 12
   })
   const recommendationArticles = await getAllRecommendationPost({
     query: '',
@@ -58,49 +68,68 @@ export default async function Home() {
     page: 1,
     limit: 12
   })
-  const getFeaturedPost = await getAllRecommendationPost({
-    query: '',
-    category: '',
-    page: 1,
-    limit: 12
-  })
+  
   const getAllCombinedPosts = await getCombinedPosts({
     query: '',
     category: '',
     page: 1,
     limit: 20
   })
+  const getAfricaPosts = await getCombinedAfricaPosts({
+    query: '',
+    category: '',
+    page: 1,
+    limit: 12
+  })
+  const FeaturedPosts = await getFeaturedPosts({
+    query: '',
+    category: '',
+    page: 1,
+    limit: 12
+  })
   return (
-    <div >
-      <div className=''/>
-      
-      <LatestPostCollection
-        data={getAllCombinedPosts?.data}  
-        emptyTitle="No Tech Article"
-        emptyStateSubText="Come back later"
-        collectionType="All_LatestPost"
-        limit={20}
-        page={1}
-        totalPages={2}
-      />
-      <div className="">Africa</div>
+    <div>
+     <div className="hidden md:block">
+        <LatestPostCollection
+          data={getAllCombinedPosts?.data}  
+          emptyTitle="No Tech Article"
+          emptyStateSubText="Come back later"
+          collectionType="All_LatestPost"
+          limit={20}
+          page={1}
+          totalPages={2}
+        />
+      </div>
+    
+        <h1 className=' text-xl font-semibold italic border-b-2 mt-10 mx-10 px-5 border-slate-600 hover:border-b-yellow-700'><Link href="/africa">Africa</Link></h1>
+        <div className="py-10 mx-10">
+            <AfricanPostCollection
+            data={getAfricaPosts?.data}  
+            emptyTitle="No Tech Article"
+            emptyStateSubText="Come back later"
+            collectionType="All_AfricaPost"
+            limit={12}
+            page={1}
+            totalPages={2}
+            />
+          </div>
       <Qoute/>
       <h1 className=' text-2xl font-semibold italic  border-t-4 border-b-2 p-5 mx-10 border-slate-600'>Featured</h1>
       <div className="py-10 mx-10">
       <FeaturedPost
-        data={recommendationArticles?.data} 
-        emptyTitle="No Recommendation Article"
+        data={FeaturedPosts?.data} 
+        emptyTitle="No Featured Article"
         emptyStateSubText="Come back later"
-        collectionType="All_RecommendationPost"
+        collectionType="All_FeaturedPost"
         limit={12}
         page={1}
         totalPages={2}
       />
       </div>
       
-      <Link href="/technology"><h1 className=' text-2xl font-semibold italic  border-t-4 border-b-2 p-5 mx-10 border-slate-600 hover:border-b-yellow-700'>Technology</h1></Link>
+      <h1 className=' text-2xl font-semibold italic  border-t-4 border-b-2 p-5 mx-10 border-slate-600 hover:border-b-yellow-700'><Link href="/technology">Technology</Link></h1>
       <div className="py-10 mx-10">
-      <TechCollection 
+      <Collection 
         data={techArticles?.data}  
         emptyTitle="No Tech Article"
         emptyStateSubText="Come back later"
@@ -110,7 +139,7 @@ export default async function Home() {
         totalPages={2}
       />
       </div>
-      <Link href="/business"><h1 className='text-2xl font-semibold italic text-black border-t-4 border-b-2 p-5 mx-10 border-slate-600'>Business</h1></Link>
+      <h1 className='text-2xl font-semibold italic text-black border-t-4 border-b-2 p-5 mx-10 border-slate-600'><Link href="/business">Business</Link></h1>
       <div className="py-10 m-10">
         <BusinessCollection
           data={businessArticles?.data} 
@@ -122,7 +151,7 @@ export default async function Home() {
           totalPages={2}
         />
       </div>
-      <Link href="/recommendation"><h1 className=' text-2xl font-semibold italic hover:text-blue-700  border-t-4 border-b-2 p-5 mx-10 border-slate-600'>Recommendation</h1></Link>
+     <h1 className=' text-2xl font-semibold italic hover:text-blue-700  border-t-4 border-b-2 p-5 mx-10 border-slate-600'> <Link href="/recommendation">Recommendation</Link></h1>
       <div className="py-10 m-10">
         <RecommendationCollection
         data={recommendationArticles?.data} 
@@ -134,7 +163,7 @@ export default async function Home() {
         totalPages={2}
         />
       </div>
-      <Link href="/game-changers"><h1 className=' text-2xl font-semibold italic hover:text-green-700  border-t-4 border-b-2 p-5 mx-10 border-slate-600'>Game Changers</h1></Link>
+      <h1 className=' text-2xl font-semibold italic hover:text-green-700  border-t-4 border-b-2 p-5 mx-10 border-slate-600'><Link href="/game-changers">Game Changers</Link></h1>
       <div className="py-10 m-10">
         <GameChangersCollection
          data={gameChangersArticles?.data} 

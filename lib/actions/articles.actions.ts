@@ -1,9 +1,8 @@
 'use server'
-
 import Article from "../database/model/TechnologyPost.model";
 import { connectToDatabase } from "../database";
 import Category from "../database/model/category.model";
-import { CreateArticleParams, UpdateArticleParams, DeleteArticleParams, GetAllArticlesParams, GetArticlesByCategoryParams } from "@/types";
+import { CreateArticleParams, UpdateArticleParams, DeleteArticleParams, GetAllArticlesParams, GetArticlesByCategoryParams, GetRelatedPostByCategoryParams } from "@/types";
 import { revalidatePath } from "next/cache";
 import { handleError } from "../utils";
 import User from "../database/model/user.model";
@@ -155,3 +154,28 @@ export async function getArticlesByCategory({ categoryId, articleId, limit = 6, 
 
 
 // fetchning viewers of the post
+export async function getRelatedArticleByCategory({
+    categoryId,
+    articleSlug,
+    limit = 3,
+    page = 1,
+  }: GetRelatedPostByCategoryParams) {
+    try {
+      await connectToDatabase()
+  
+      const skipAmount = (Number(page) - 1) * limit
+      const conditions = { $and: [{ category: categoryId }, { slug: { $ne: articleSlug } }] }
+  
+      const eventsQuery = Article.find(conditions)
+        .sort({ createdAt: 'desc' })
+        .skip(skipAmount)
+        .limit(limit)
+  
+      const article = await populateArticle(eventsQuery)
+      const articleCount = await Article.countDocuments(conditions)
+  
+      return { data: JSON.parse(JSON.stringify(article)), totalPages: Math.ceil(articleCount / limit) }
+    } catch (error) {
+      handleError(error)
+    }
+  }

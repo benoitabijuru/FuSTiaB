@@ -1,8 +1,11 @@
 
 import  DailyQuoteFormCreater  from '@/components/qoute/QuoteForm'
+import { auth } from '@clerk/nextjs/server';
+import { redirect } from 'next/navigation';
 import React from 'react'
 
 const createQuotes = () => {
+  
   return (
     <>
     <section className=" bg-dotted-pattern bg-cover bg-center py-5"> 

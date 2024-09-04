@@ -1,5 +1,4 @@
 'use server'
-
 import BusinessPost from "../database/model/businessPost.model";
 import { connectToDatabase } from "../database";
 import Category from "../database/model/category.model";

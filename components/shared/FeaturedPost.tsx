@@ -1,4 +1,4 @@
-import { IRecommendationPost } from '@/lib/database/model/recomendationPost.model'
+
 import React from 'react'
 import FeaturedPostCard from './FeaturedPostCard'
 import { Card, CardContent } from "@/components/ui/card"
@@ -9,17 +9,18 @@ import {
   CarouselNext,
   CarouselPrevious,
 } from "@/components/ui/carousel"
+import { IPost } from '@/lib/actions/pipeline.actions'
 
 
 type CollectionProps ={
-  data:IRecommendationPost[],
+  data:IPost[],
   emptyTitle:string,
   emptyStateSubText:string,
   limit:number,
   page: number | string,
   totalPages?: number,
   urlParamName?:string,
-  collectionType?:"All_RecommendationPost"| "Latest_Recommendation_Post" | "My_RecommendationPost"
+  collectionType?:"All_FeaturedPost"| "Latest_Featured_Post" | "My_FeaturedPost"
 }
 const FeaturedPost = ({
   data,
@@ -34,18 +35,18 @@ const FeaturedPost = ({
     <div className="mx-5">
     <Carousel className="flex flex-row w-full">
       <CarouselContent className="-ml-1">
-        {data.map((recommendationPost) => (
-          <CarouselItem key={recommendationPost._id} className="pl-1 md:basis-1/2 lg:basis-1/3">
+        {data.map((featuredPost) => (
+          <CarouselItem key={featuredPost._id} className="pl-1 md:basis-1/2 lg:basis-1/3">
             <div className="p-1">
                 <CardContent className="flex aspect-square items-center justify-center p-6">
-                <FeaturedPostCard recommendationPost={recommendationPost} />
+                <FeaturedPostCard featuredPost={featuredPost} />
                 </CardContent>
             </div>
           </CarouselItem>
         ))}
       </CarouselContent>
-      <CarouselPrevious/>
-      <CarouselNext />
+      <CarouselPrevious className='bg-green-100  hover:bg-green-500'/>
+      <CarouselNext className='bg-green-100 hover:bg-green-500' />
     </Carousel>
     </div>
   )

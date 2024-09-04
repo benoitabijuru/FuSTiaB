@@ -7,6 +7,7 @@ export const ArticleFormSchema = z.object({
   description: z.string().min(3, "Description must be at least 3 characters"),
   content: z.string().min(50, "Content must be at least 50 character"),
   imageUrl: z.string(),
+  imageCaption: z.string(),
   categoryId: z.string(),
   author: z.string(),
   comment: z.string(),
@@ -14,7 +15,16 @@ export const ArticleFormSchema = z.object({
   slug:z.string().min(1, { message: "Slug cannot be empty" }).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
     message: "Slug must contain only lowercase letters, numbers, and hyphens. It should not start or end with a hyphen or contain consecutive hyphens.",
   }),
+  isFeatured: z.boolean(),
+  isRelatedToAfrica: z.boolean(),
+  isNewsTrending: z.boolean(),
+  seo: z.object({
+    metaTitle: z.string().max(100, "Meta title must be 100 characters or less"),
+    metaDescription: z.string().max(300, "Meta description must be 300 characters or less"),
+    keywords: z.array(z.string())
+  })
 });
+
 
 // Business form schema
 export const BusinessPostFormSchema = z.object({
@@ -22,6 +32,7 @@ export const BusinessPostFormSchema = z.object({
   description: z.string().min(3, "Description must be at least 3 characters"),
   content: z.string().min(50, "Content must be at least 50 character"),
   imageUrl: z.string(),
+  imageCaption: z.string(),
   categoryId: z.string(),
   author: z.string(),
   comment: z.string(),
@@ -29,6 +40,14 @@ export const BusinessPostFormSchema = z.object({
   slug:z.string().min(1, { message: "Slug cannot be empty" }).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
     message: "Slug must contain only lowercase letters, numbers, and hyphens. It should not start or end with a hyphen or contain consecutive hyphens.",
   }),
+  isFeatured: z.boolean(),
+  isRelatedToAfrica: z.boolean(),
+  isNewsTrending: z.boolean(),
+  seo: z.object({
+    metaTitle: z.string().max(100, "Meta title must be 100 characters or less"),
+    metaDescription: z.string().max(300, "Meta description must be 300 characters or less"),
+    keywords: z.array(z.string())
+  })
 });
 // Business form schema
 export const RecommendationPostFormSchema = z.object({
@@ -36,6 +55,7 @@ export const RecommendationPostFormSchema = z.object({
   description: z.string().min(3, "Description must be at least 3 characters"),
   content: z.string().min(50, "Content must be at least 50 character"),
   imageUrl: z.string(),
+  imageCaption: z.string(),
   categoryId: z.string(),
   author: z.string(),
   comment: z.string(),
@@ -43,6 +63,14 @@ export const RecommendationPostFormSchema = z.object({
   slug:z.string().min(1, { message: "Slug cannot be empty" }).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
     message: "Slug must contain only lowercase letters, numbers, and hyphens. It should not start or end with a hyphen or contain consecutive hyphens.",
   }),
+  isFeatured: z.boolean(),
+  isRelatedToAfrica: z.boolean(),
+  isNewsTrending: z.boolean(),
+  seo: z.object({
+    metaTitle: z.string().max(100, "Meta title must be 100 characters or less"),
+    metaDescription: z.string().max(300, "Meta description must be 300 characters or less"),
+    keywords: z.array(z.string())
+  })
 });
 // gameChangers form schema
 export const GameChangersPostFormSchema = z.object({
@@ -50,6 +78,7 @@ export const GameChangersPostFormSchema = z.object({
   description: z.string().min(3, "Description must be at least 3 characters"),
   content: z.string().min(50, "Content must be at least 50 character"),
   imageUrl: z.string(),
+  imageCaption: z.string(),
   categoryId: z.string(),
   author: z.string(),
   comment: z.string(),
@@ -57,6 +86,14 @@ export const GameChangersPostFormSchema = z.object({
   slug:z.string().min(1, { message: "Slug cannot be empty" }).regex(/^[a-z0-9]+(?:-[a-z0-9]+)*$/, {
     message: "Slug must contain only lowercase letters, numbers, and hyphens. It should not start or end with a hyphen or contain consecutive hyphens.",
   }),
+  isFeatured: z.boolean(),
+  isRelatedToAfrica: z.boolean(),
+  isNewsTrending: z.boolean(),
+  seo: z.object({
+    metaTitle: z.string().max(100, "Meta title must be 100 characters or less"),
+    metaDescription: z.string().max(300, "Meta description must be 300 characters or less"),
+    keywords: z.array(z.string())
+  })
 });
 
 

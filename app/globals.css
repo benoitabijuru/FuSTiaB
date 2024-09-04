@@ -97,6 +97,10 @@ body {
   .wrapper {
     @apply max-w-7xl lg:mx-auto p-5 md:px-10 xl:px-0 w-full;
   }
+  .dynamic-wrapper {
+    @apply max-w-7xl lg:mx-auto p-20 md:px-20 xl:px-0 w-full;
+  }
+
 
   .flex-center {
     @apply flex justify-center items-center;
@@ -508,5 +512,27 @@ body {
   }
 }
 .about-body{
-  background: linear-gradient(135deg, #000000 0%, #0b0b0b 25%, #1a1a1a 50%, #0b0b0b 75%, #000000 100%);
+  background: linear-gradient(135deg, #000000 0%, #363636 25%, #1a1a1a 50%, #434343 75%, #000000 100%);
+}
+.bg-gr-gradient{
+  background: linear-gradient(135deg, #525151 0%,#161616  25%, #121212 50%,#545728  75%,  #505124 100%);
+}
+.bg-footer-gradient{
+  background: linear-gradient(180deg, #3e3e3e 0%, #1b1b1b 25%, #121212 50%, #161616 75%, #525151 100%);
+}
+
+.bg-topbar-gradient{
+  background: linear-gradient(180deg, #000000 0%, #0b0b0b 25%, #121212 50%, #232323 75%, #434343 100%);
+}
+.bg-black-gradient-2{
+  background: linear-gradient(135deg, #000000 0%, #000000 25%, #121212 50%, #161616 75%, #2d2d2d 100%);
+}
+.bg-front-card{
+  background: linear-gradient(135deg, #505551 0%, #000000 25%, #234f1f 50%, #161616 75%, #515251 100%);
+}
+.bg-front-card-technology{
+  background: linear-gradient(135deg, #7d6451 0%, #000000 25%, #4f4c1f 50%, #161616 75%, #52342d 100%);
+}
+.bg-gr-gradient-3{
+  background: linear-gradient(135deg, #3d5238 0%, #292d29 25%, #121212 50%, #161616 75%, #525151 100%);
 }

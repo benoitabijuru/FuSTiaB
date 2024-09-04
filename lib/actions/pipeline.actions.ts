@@ -1,4 +1,4 @@
-import { GetAllArticlesParams } from '@/types';
+import { GetAllArticlesParams, GetRelatedPostByCategoryParams } from '@/types';
 import { connectToDatabase } from '../database';
 import Article from '../database/model/TechnologyPost.model';
 import BusinessPost from '../database/model/businessPost.model';
@@ -27,6 +27,8 @@ export interface IPost extends Document {
 const getCategoryByName = async (name: string) => {
     return Category.findOne({ name: { $regex: name, $options: 'i' } });
 }
+
+
 
 // Function to populate the author and category fields for an array of posts
 const populateCombinedPosts = async (posts: any[]) => {
@@ -273,3 +275,371 @@ export async function getCombinedPostBySlug(postSlug: string) {
         handleError(error);
     }
 }
+
+export async function getCombinedAfricaPosts({ query, limit = 20, page, category }: GetAllArticlesParams) {
+    try {
+        await connectToDatabase(); // Ensure database connection
+
+        const matchStage = { isRelatedToAfrica: true }; // Match posts related to Africa
+
+        // Aggregate articles
+        const articles: IPost[] = await Article.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "Article" }
+                }
+            }
+        ]);
+
+        // Aggregate business posts
+        const businessPosts: IPost[] = await BusinessPost.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "BusinessPost" }
+                }
+            }
+        ]);
+
+        // Aggregate recommendation posts
+        const recommendationPosts: IPost[] = await RecommendationPost.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "RecommendationPost" }
+                }
+            }
+        ]);
+
+        // Aggregate game changers posts
+        const gameChangersPosts: IPost[] = await GameChangersPost.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "GameChangersPost" }
+                }
+            }
+        ]);
+
+        // Combine all posts into a single array
+        const combinedPosts: IPost[] = [...articles, ...businessPosts, ...recommendationPosts, ...gameChangersPosts];
+           
+        // Filter posts by title if a query is provided
+        const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {};
+
+        // Find category by name if a category is provided
+        const categoryCondition = category ? await getCategoryByName(category) : null;
+
+        // Combine conditions
+        const conditions = {
+            ...titleCondition,
+            ...(categoryCondition && { category: categoryCondition._id })
+        };
+
+        // Filter combined posts based on conditions
+        const filteredPosts = combinedPosts.filter(post => {
+            if (conditions.title && !new RegExp(conditions.title.$regex, 'i').test(post.title)) {
+                return false;
+            }
+            if (conditions.category && post.category._id.toString() !== conditions.category.toString()) {
+                return false;
+            }
+            return true;
+        });
+
+        // Sort posts by creation date in descending order
+        filteredPosts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+
+        // Paginate the sorted posts
+        const skipAmount = (Number(page) - 1) * limit;
+        const paginatedPosts = filteredPosts.slice(skipAmount, skipAmount + limit);
+
+        // Populate author and category fields for each post
+        const populatedPosts = await populateCombinedPosts(paginatedPosts);
+        return {
+            data: populatedPosts.map(post => ({
+                ...post,
+                author: post.author ? { ...post.author } : null,
+                category: post.category ? { ...post.category } : null,
+            })),
+            totalPages: Math.ceil(filteredPosts.length / limit), // Calculate total pages
+        };
+
+    } catch (error) {
+        handleError(error); // Handle errors
+    }
+}
+
+export async function getAfricanPostsBySlug(postSlug: string) {
+    try {
+        await connectToDatabase(); // Ensure database connection
+
+        const matchStage = { isRelatedToAfrica: true }; // Match posts related to Africa
+        // Aggregate articles
+        const articles: IPost[] = await Article.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "Article" }
+                }
+            }
+        ]);
+
+        // Aggregate business posts
+        const businessPosts: IPost[] = await BusinessPost.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "BusinessPost" }
+                }
+            }
+        ]);
+
+        // Aggregate recommendation posts
+        const recommendationPosts: IPost[] = await RecommendationPost.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "RecommendationPost" }
+                }
+            }
+        ]);
+
+        // Aggregate game changers posts
+        const gameChangersPosts: IPost[] = await GameChangersPost.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "GameChangersPost" }
+                }
+            }
+        ]);
+
+        // Combine all posts into a single array
+        const combinedPosts: IPost[] = [...articles, ...businessPosts, ...recommendationPosts, ...gameChangersPosts];
+           
+        // Find the post by ID in the combined array
+        const post = combinedPosts.find(post => post.slug && post.slug.toString() === postSlug);
+        if (!post) throw new Error('Post not found');
+        return JSON.parse(JSON.stringify(post));
+    } catch (error) {
+        handleError(error);
+    }
+}
+
+export async function getFeaturedPosts({ query, limit = 20, page, category }: GetAllArticlesParams) {
+    try {
+        await connectToDatabase(); // Ensure database connection
+
+        const matchStage = { isFeatured: true }; // Match posts related to Africa
+
+        // Aggregate articles
+        const articles: IPost[] = await Article.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "Article" }
+                }
+            }
+        ]);
+
+        // Aggregate business posts
+        const businessPosts: IPost[] = await BusinessPost.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "BusinessPost" }
+                }
+            }
+        ]);
+
+        // Aggregate recommendation posts
+        const recommendationPosts: IPost[] = await RecommendationPost.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "RecommendationPost" }
+                }
+            }
+        ]);
+
+        // Aggregate game changers posts
+        const gameChangersPosts: IPost[] = await GameChangersPost.aggregate([
+            { $match: matchStage },
+            {
+                $project: {
+                    title: 1,
+                    description: 1,
+                    content: 1,
+                    imageUrl: 1,
+                    imageCaption: 1,
+                    category: 1,
+                    author: 1,
+                    comments: 1,
+                    createdAt: 1,
+                    slug: 1,
+                    type: { $literal: "GameChangersPost" }
+                }
+            }
+        ]);
+
+        // Combine all posts into a single array
+        const combinedFeaturedPosts: IPost[] = [...articles, ...businessPosts, ...recommendationPosts, ...gameChangersPosts];
+           
+        // Filter posts by title if a query is provided
+        const titleCondition = query ? { title: { $regex: query, $options: 'i' } } : {};
+
+        // Find category by name if a category is provided
+        const categoryCondition = category ? await getCategoryByName(category) : null;
+
+        // Combine conditions
+        const conditions = {
+            ...titleCondition,
+            ...(categoryCondition && { category: categoryCondition._id })
+        };
+
+        // Filter combined posts based on conditions
+        const filteredPosts = combinedFeaturedPosts.filter(post => {
+            if (conditions.title && !new RegExp(conditions.title.$regex, 'i').test(post.title)) {
+                return false;
+            }
+            if (conditions.category && post.category._id.toString() !== conditions.category.toString()) {
+                return false;
+            }
+            return true;
+        });
+
+        // Sort posts by creation date in descending order
+        filteredPosts.sort((a, b) => b.createdAt.getTime() - a.createdAt.getTime());
+
+        // Paginate the sorted posts
+        const skipAmount = (Number(page) - 1) * limit;
+        const paginatedPosts = filteredPosts.slice(skipAmount, skipAmount + limit);
+
+        // Populate author and category fields for each post
+        const featuredPosts = await populateCombinedPosts(paginatedPosts);
+        return {
+            data: featuredPosts.map(post => ({
+                ...post,
+                author: post.author ? { ...post.author } : null,
+                category: post.category ? { ...post.category } : null,
+            })),
+            totalPages: Math.ceil(filteredPosts.length / limit), // Calculate total pages
+        };
+
+    } catch (error) {
+        handleError(error); // Handle errors
+    }
+}
+
