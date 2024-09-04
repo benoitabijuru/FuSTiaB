@@ -67,7 +67,7 @@ searchParams: { [key: string]: string | string[] | undefined }
        <div className=""><p className="text-xl font-semibold bg-slate-600 rounded-sm text-white py-1 px-3 italic">FUSTIAB</p></div>
        <div className="flex flex-row justify-between">
         <p className="font-bold text-blue-500 p-medium-16" >Share </p>
-        <div className=""><SocialLinks/></div>
+        <div className=""><SocialLinks shareUrl='' title=''/></div>
         </div>
        </div>
         <Image

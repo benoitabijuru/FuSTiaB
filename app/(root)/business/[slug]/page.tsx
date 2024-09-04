@@ -72,7 +72,7 @@ const businessPostDetails = async ({ params: { slug }, searchParams }: SearchPar
                 </div>
                 <div className="flex items-center">
                   <p className="font-bold text-blue-500 text-sm sm:text-base lg:text-lg mr-2">Share</p>
-                  <SocialLinks />
+                  <SocialLinks shareUrl='' title='' />
                 </div>
               </div>
               <Image
